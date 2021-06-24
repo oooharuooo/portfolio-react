@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const D = () => {
+const LogoD = () => {
 	return (
 		<div>
 			<svg
-				width="737"
-				height="524"
+				width="100%"
+				height="auto"
 				viewBox="0 0 737 524"
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
@@ -66,4 +66,4 @@ const D = () => {
 	);
 };
 
-export default D;
+export default LogoD;

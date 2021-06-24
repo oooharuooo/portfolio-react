@@ -4,36 +4,62 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuOpenIcon from "@material-ui/icons/MenuOpen";
 
+import styled from "styled-components";
 import { motion } from "framer-motion";
+
+const container = {
+	hidden: { opacity: 0 },
+	show: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.3,
+		},
+	},
+};
+
+const item = {
+	hidden: { opacity: 0 },
+	show: { opacity: 1 },
+};
 
 const NavBar = () => {
 	const [showMenu, setShowMenu] = useState(false);
 
 	return (
-		<nav>
+		<NavBarContainer>
 			{showMenu ? (
 				<MenuOpenIcon onClick={() => setShowMenu(!showMenu)} />
 			) : (
 				<MenuIcon onClick={() => setShowMenu(!showMenu)} />
 			)}
 			{showMenu && (
-				<ul>
-					<li>
+				<motion.ul variants={container} initial="hidden" animate="show">
+					<motion.li variants={item}>
 						<Link to="/">Home</Link>
-					</li>
-					<li>
+					</motion.li>
+					<motion.li variants={item}>
 						<Link to="/about">About</Link>
-					</li>
-					<li>
+					</motion.li>
+					<motion.li variants={item}>
 						<Link to="/work">Work</Link>
-					</li>
-					<li>
+					</motion.li>
+					<motion.li variants={item}>
 						<a href="mailto:haruthong@gmail.com">Contact</a>
-					</li>
-				</ul>
+					</motion.li>
+				</motion.ul>
 			)}
-		</nav>
+		</NavBarContainer>
 	);
 };
 
 export default NavBar;
+
+const NavBarContainer = styled.nav`
+	display: flex;
+	justify-content: space-between;
+	align-self: flex-start;
+	justify-content: flex-end;
+	ul {
+		position: absolute;
+	}
+`;
