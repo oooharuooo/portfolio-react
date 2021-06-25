@@ -7,7 +7,7 @@ const WorkPage = () => {
 	return (
 		<WorkPageContainer>
 			{projects.map((project) => (
-				<img src={project.url} alt="project"></img>
+				<img key={project.url} src={project.url} alt="project"></img>
 			))}
 		</WorkPageContainer>
 	);
