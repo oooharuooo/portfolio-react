@@ -7,32 +7,23 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 
 const Footer = () => {
 	return (
-		<footer>
-			<SocialContainer>
-				<li>
-					<a
-						href="https://www.linkedin.com/in/dat-thong-846b8a193/"
-						rel="noopener noreferrer"
-						target="_blank"
-					>
-						<LinkedInIcon />
-					</a>
-				</li>
-				<li>
-					<a
-						href="https://github.com/oooharuooo"
-						rel="noopener noreferrer"
-						target="_blank"
-					>
-						<GitHubIcon />
-					</a>
-				</li>
-			</SocialContainer>
-		</footer>
+		<CopyRight>
+			<h4>Copy right@ Dat V Thong 2021</h4>
+		</CopyRight>
 	);
 };
 
 export default Footer;
-const SocialContainer = styled.ul`
+const CopyRight = styled.footer`
+	background-color: black;
+
 	display: flex;
+	justify-content: center;
+	align-self: flex-end;
+	height: fit-content;
+
+	padding: 0 1rem;
+	h4 {
+		color: white;
+	}
 `;
