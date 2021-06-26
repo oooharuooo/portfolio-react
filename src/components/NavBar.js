@@ -155,6 +155,7 @@ const NavBarContainer = styled.nav`
 	}
 	.social-menu-container {
 		border-left: 1px solid white;
+		background-color: black;
 
 		align-self: flex-end;
 
