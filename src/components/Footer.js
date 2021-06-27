@@ -7,7 +7,7 @@ const container = {
 	hidden: { opacity: 0 },
 	show: {
 		opacity: 1,
-		transition: { ease: "easeOut", duration: 1.5 },
+		transition: { ease: "easeOut", duration: 0.5, delay: 0.9 },
 	},
 };
 

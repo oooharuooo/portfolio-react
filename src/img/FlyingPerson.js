@@ -9,10 +9,13 @@ const container = {
 const icon = {
 	hidden: {
 		opacity: 0,
+		// y: 300,
+		x: "60vw",
 	},
 	visible: {
 		opacity: 1,
-		transition: { ease: "easeOut", duration: 6 },
+		// y: -300,
+		transition: { ease: "easeOut", duration: 2 },
 	},
 };
 
@@ -214,32 +217,6 @@ const FlyingPerson = () => {
 						/>
 					</g>
 				</g>
-				<defs>
-					<linearGradient
-						id="paint0_linear"
-						x1="231.257"
-						y1="207.903"
-						x2="222.34"
-						y2="158.27"
-						gradientUnits="userSpaceOnUse"
-					>
-						<stop stopColor="#808080" stopOpacity="0.25" />
-						<stop offset="0.54" stopColor="#808080" stopOpacity="0.12" />
-						<stop offset="1" stopColor="#808080" stopOpacity="0.1" />
-					</linearGradient>
-					<linearGradient
-						id="paint1_linear"
-						x1="8963.29"
-						y1="7746.01"
-						x2="10303.4"
-						y2="7746.01"
-						gradientUnits="userSpaceOnUse"
-					>
-						<stop stopColor="#808080" stopOpacity="0.25" />
-						<stop offset="0.54" stopColor="#808080" stopOpacity="0.12" />
-						<stop offset="1" stopColor="#808080" stopOpacity="0.1" />
-					</linearGradient>
-				</defs>
 			</motion.svg>
 		</Person>
 	);
@@ -248,7 +225,6 @@ const FlyingPerson = () => {
 const Person = styled.div`
 	position: absolute;
 	z-index: 10;
-	bottom: 60%;
 `;
 
 export default FlyingPerson;
