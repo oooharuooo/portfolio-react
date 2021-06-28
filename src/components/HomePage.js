@@ -19,10 +19,10 @@ const container = {
 const HomePage = () => {
 	return (
 		<Home
-		// as={motion.div}
-		// variants={container}
-		// initial="hidden"
-		// animate="visible"
+			as={motion.div}
+			variants={container}
+			initial="hidden"
+			animate="visible"
 		>
 			<Cloud />
 			<FlyingPerson />
