@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 
 const container = {
-	hidden: { opacity: 0, y: 200, x: "50vw" },
+	hidden: { opacity: 0, y: 200 },
 	visible: {
 		opacity: 1,
 		y: -350,
 		scale: 0.5,
-		transition: { ease: "easeOut", duration: 2, delay: 1.5 },
+		transition: { ease: "easeOut", duration: 2, delay: 2 },
 	},
 };
 const icon = {
@@ -17,7 +17,7 @@ const icon = {
 	},
 	visible: {
 		y: "200%",
-		x: "-800%",
+		x: "-900%",
 		scale: 4,
 		transition: { ease: "easeOut", duration: 5, delay: 3 },
 	},
@@ -68,8 +68,7 @@ const flyingIntro = {
 	},
 	visible: {
 		opacity: 0,
-		x: -200,
-		y: 50,
+		y: -80,
 		transition: {
 			ease: "easeIn",
 			duration: 8,
@@ -86,7 +85,11 @@ const FlyingPerson = () => {
 			animate="visible"
 		>
 			<motion.div variants={flyingIntro} className="flying-intro">
-				<h2>HURRY! I'm late to work</h2>
+				<h2>
+					HURRY!
+					<br />
+					I'm late to work...
+				</h2>
 			</motion.div>
 			<motion.svg
 				variants={icon}
@@ -286,9 +289,11 @@ const FlyingPerson = () => {
 const Person = styled.div`
 	position: absolute;
 	z-index: 10;
+	left: 60%;
 
 	.flying-intro {
 		position: absolute;
+		text-align: center;
 	}
 `;
 
