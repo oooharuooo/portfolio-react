@@ -12,7 +12,7 @@ const container = {
 
 const clouds = {
 	hidden: {
-		x: "150%",
+		x: 0,
 	},
 	visible: {
 		x: "-100vw",
@@ -26,7 +26,7 @@ const clouds = {
 
 const cloud2 = {
 	hidden: {
-		x: "150%",
+		x: 0,
 	},
 	visible: {
 		x: "-100vw",
@@ -40,7 +40,7 @@ const cloud2 = {
 
 const Cloud = () => {
 	return (
-		<div>
+		<Wrapper>
 			<motion.svg
 				variants={container}
 				initial="hidden"
@@ -107,10 +107,19 @@ const Cloud = () => {
 					</g>
 				</g>
 			</motion.svg>
-		</div>
+		</Wrapper>
 	);
 };
 
 export default Cloud;
 
-const div = styled.div``;
+const Wrapper = styled.div`
+	#cloud {
+		@media (min-width: 1024px) {
+			transform: translateX(30%);
+		}
+		@media (min-width: 1440px) {
+			transform: translateX(50%);
+		}
+	}
+`;

@@ -139,18 +139,24 @@ const NavBarContainer = styled.nav`
 
 			text-align: right;
 			font-size: 2rem;
+
+			@media (min-width: 768px) {
+				justify-content: space-evenly;
+			}
 		}
 
 		.active-link {
-			border-bottom: 1px solid white;
+			border-bottom: 1px solid #bac6f2;
 			font-weight: bolder;
+			color: #bac6f2;
 		}
 	}
 	.links-hover-effect {
 		color: white;
 		&:hover {
-			border-bottom: 1px solid white;
+			border-bottom: 1px solid #bac6f2;
 			font-weight: bolder;
+			color: #bac6f2;
 		}
 	}
 	.social-menu-container {

@@ -6,9 +6,9 @@ const container = {
 	hidden: { opacity: 0, y: 200 },
 	visible: {
 		opacity: 1,
-		y: -350,
+		y: -150,
 		scale: 0.5,
-		transition: { ease: "easeOut", duration: 2, delay: 2 },
+		transition: { ease: "easeOut", duration: 2, delay: 3 },
 	},
 };
 const icon = {
@@ -17,9 +17,9 @@ const icon = {
 	},
 	visible: {
 		y: "200%",
-		x: "-900%",
+		x: "-950%",
 		scale: 4,
-		transition: { ease: "easeOut", duration: 5, delay: 3 },
+		transition: { ease: "easeOut", duration: 4, delay: 4 },
 	},
 };
 
@@ -37,7 +37,7 @@ const cravat = {
 			duration: 0.8,
 			repeat: Infinity,
 			repeatType: "reverse",
-			delay: 0.5,
+			delay: 1.5,
 		},
 	},
 };
@@ -56,7 +56,7 @@ const hair = {
 			duration: 2,
 			repeat: Infinity,
 			repeatType: "reverse",
-			delay: 0.5,
+			delay: 1.5,
 		},
 	},
 };
@@ -71,7 +71,7 @@ const flyingIntro = {
 		y: -80,
 		transition: {
 			ease: "easeIn",
-			duration: 8,
+			duration: 9,
 		},
 	},
 };

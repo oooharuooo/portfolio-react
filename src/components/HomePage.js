@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FlyingPerson from "../img/FlyingPerson";
 import Cloud from "../img/Cloud";
 import { motion } from "framer-motion";
+import City from "../img/City";
 
 const container = {
 	hidden: { opacity: 0, x: "-100%" },
@@ -26,6 +27,7 @@ const HomePage = () => {
 		>
 			<Cloud />
 			<FlyingPerson />
+			<City />
 		</Home>
 	);
 };
@@ -33,5 +35,11 @@ const HomePage = () => {
 export default HomePage;
 
 const Home = styled.div`
-	background: #e9edfa url("projectImg/city.svg") center / cover no-repeat fixed;
+	${
+		"" /* background: #e9edfa url("projectImg/city.svg") center / cover no-repeat fixed; */
+	}
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 `;
