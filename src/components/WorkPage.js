@@ -58,12 +58,12 @@ const WorkPage = () => {
 	}, [index, workData, animation]);
 
 	// Auto go to next slide
-	// useEffect(() => {
-	// 	let slider = setInterval(() => {
-	// 		setIndex(index + 1);
-	// 	}, 5000);
-	// 	return () => clearInterval(slider);
-	// }, [index]);
+	useEffect(() => {
+		let slider = setInterval(() => {
+			setIndex(index + 1);
+		}, 5000);
+		return () => clearInterval(slider);
+	}, [index]);
 
 	return (
 		<Wrapper
