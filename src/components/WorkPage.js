@@ -88,17 +88,23 @@ const WorkPage = () => {
 				}
 				return (
 					<motion.div
-						variants={
-							(position === "nextSlide" && item) ||
-							(position === "prevSlide" && item)
-						}
+						// variants={
+						// 	(position === "nextSlide" && item) ||
+						// 	(position === "prevSlide" && item)
+						// }
 						key={project.title}
-						className={`project-container ${position}`}
+						className={`project-container ${position} ${
+							projectIndex === index + 1 ? "overlap" : ""
+						}`}
 					>
 						<div className="project-image">
 							<img src={project.url.path} alt={project.title} />
 						</div>
-						<div className="project-detail">
+						<div
+							className={`project-detail ${
+								position !== "activeSlide" && "non-active-slide"
+							}`}
+						>
 							<h1 className="project-detail-title">{project.title}</h1>
 							<h3 className="project-detail-description">
 								{project.description}
@@ -165,7 +171,8 @@ const Wrapper = styled.div`
 		position: absolute;
 		top: 0;
 		left: 0;
-		opacity: 0;
+
+		${"" /* opacity: 0; */}
 
 		display: flex;
 		flex-direction: column;
@@ -173,19 +180,44 @@ const Wrapper = styled.div`
 		justify-content: space-evenly;
 	}
 	.activeSlide {
-		opacity: 1;
+		${"" /* opacity: 1; */}
 		transform: translateX(0);
+		z-index: 15;
+		.project-image {
+			width: 700px;
+			box-shadow: 5px 5px 15px 5px #bac6f2;
+
+			&:hover {
+				transform: rotate3d(0, 5, -2, -10deg);
+
+				transition: 0.3s ease-in-out;
+			}
+		}
+	}
+	.non-active-slide {
+		display: none;
+	}
+	.overlap {
+		z-index: 11;
 	}
 	 {
 		.prevSlide {
 			transform: translateX(-100%);
+			transform: rotate3d(1, 1, 0, 65deg);
+			width: 100px;
+			left: 15%;
+			top: -15%;
 		}
 		.nextSlide {
 			transform: translateX(100%);
+			transform: rotate3d(-1, 1, 0, 65deg);
+			width: 100px;
+			left: 80%;
+			top: -15%;
 		}
 	}
 
 	.project-image {
-		width: 500px;
+		width: 300px;
 	}
 `;
