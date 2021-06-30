@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import projects from "../constant/projects";
 
 import styled from "styled-components";
@@ -23,15 +22,48 @@ const container = {
 	},
 };
 
+const item = {
+	hidden: { x: [-100, 0] },
+	visible: {
+		x: 0,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
+		},
+	},
+};
+
 const WorkPage = () => {
 	const [workData, setWorkData] = useState([]);
+	const [index, setIndex] = useState(0);
+	const [animation, setAnimation] = useState();
 
+	// Fetch Data
 	useEffect(() => {
 		const fetchData = () => {
 			setWorkData(projects);
 		};
 		fetchData();
 	}, []);
+
+	// Restart index if ran out of array length
+	useEffect(() => {
+		const lastIndex = workData.length - 1;
+
+		if (index < 0) {
+			setIndex(lastIndex);
+		} else if (index > lastIndex) {
+			setIndex(0);
+		}
+	}, [index, workData, animation]);
+
+	// Auto go to next slide
+	// useEffect(() => {
+	// 	let slider = setInterval(() => {
+	// 		setIndex(index + 1);
+	// 	}, 5000);
+	// 	return () => clearInterval(slider);
+	// }, [index]);
 
 	return (
 		<Wrapper
@@ -40,22 +72,60 @@ const WorkPage = () => {
 			initial="hidden"
 			animate="visible"
 		>
-			<button>
-				<NavigateBeforeIcon />
+			<button className="btn btn-next">
+				<NavigateBeforeIcon onClick={() => setIndex(index - 1)} />
 			</button>
-			{workData.map((project) => (
-				<div key={project.url} className="project-container">
-					<div
-						className="project-image"
-						style={{
-							backgroundImage: `url(${project.url})`,
-						}}
-					></div>
-					<div className="project-description">dfafd</div>
-				</div>
-			))}
-			<button>
-				<NavigateNextIcon />
+			{workData.map((project, projectIndex) => {
+				let position = "nextSlide";
+				if (projectIndex === index) position = "activeSlide";
+				if (
+					projectIndex === index - 1 ||
+					(index === 0 && projectIndex === project.length - 1)
+				) {
+					position = "prevSlide";
+				}
+				return (
+					<motion.div
+						variants={
+							(position === "nextSlide" && item) ||
+							(position === "prevSlide" && item)
+						}
+						key={project.title}
+						className={`project-container ${position}`}
+					>
+						<div className="project-image">
+							<img src={project.url.path} alt={project.title} />
+						</div>
+						<div className="project-detail">
+							<h1 className="project-detail-title">{project.title}</h1>
+							<h3 className="project-detail-description">
+								{project.description}
+							</h3>
+							<h3 className="project-detail-skill">
+								Skills used: {project.skill}
+							</h3>
+							<div className="project-detail-link">
+								<a
+									href={project.url.live}
+									rel="noopener noreferrer"
+									target="_blank"
+								>
+									Live
+								</a>
+								<a
+									href={project.url.github}
+									rel="noopener noreferrer"
+									target="_blank"
+								>
+									Github
+								</a>
+							</div>
+						</div>
+					</motion.div>
+				);
+			})}
+			<button className="btn btn-prev">
+				<NavigateNextIcon onClick={() => setIndex(index + 1)} />
 			</button>
 		</Wrapper>
 	);
@@ -67,23 +137,53 @@ const Wrapper = styled.div`
 	background-color: white;
 	display: flex;
 	align-items: center;
+	text-align: center;
+	overflow: hidden;
+
+	.btn {
+		position: absolute;
+		z-index: 50;
+		border: none;
+		background-color: inherit;
+		svg {
+			font-size: 2rem;
+		}
+		&-next {
+			left: 0;
+		}
+		&-prev {
+			right: 0;
+		}
+	}
 
 	.project-container {
 		height: 100%;
 		width: 100%;
 
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: space-evenly;
+	}
+	.activeSlide {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	 {
+		.prevSlide {
+			transform: translateX(-100%);
+		}
+		.nextSlide {
+			transform: translateX(100%);
+		}
 	}
 
 	.project-image {
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
-
-		flex-basis: 50%;
-		height: 100%;
-		width: 100%;
+		width: 500px;
 	}
 `;
