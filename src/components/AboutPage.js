@@ -10,7 +10,7 @@ const container = {
 	visible: {
 		opacity: 1,
 		x: 0,
-		backgroundColor: "white",
+		// backgroundColor: "white",
 		transition: {
 			ease: "easeInOut",
 			duration: 1,
@@ -20,17 +20,19 @@ const container = {
 
 const AboutPage = () => {
 	return (
-		<About
+		<Wrapper
 			as={motion.div}
 			variants={container}
 			initial="hidden"
 			animate="visible"
 		>
 			About
-		</About>
+		</Wrapper>
 	);
 };
 
 export default AboutPage;
 
-const About = styled.div``;
+const Wrapper = styled.div`
+	background-color: white;
+`;
