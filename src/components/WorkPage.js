@@ -23,9 +23,11 @@ const container = {
 };
 
 const item = {
-	hidden: { x: [-100, 0] },
+	hidden: { x: [-100, 0], rotateY: [-150, 0], scale: [0.25, 1] },
 	visible: {
 		x: 0,
+		rotateY: 0,
+		scale: 1,
 		transition: {
 			ease: "easeInOut",
 			duration: 0.5,
@@ -144,9 +146,9 @@ const Wrapper = styled.div`
 		position: absolute;
 		z-index: 50;
 		border: none;
-		background-color: inherit;
+		background: none;
 		svg {
-			font-size: 2rem;
+			font-size: 4rem;
 		}
 		&-next {
 			left: 0;
