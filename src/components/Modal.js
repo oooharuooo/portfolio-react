@@ -5,10 +5,28 @@ import { motion } from "framer-motion";
 
 import CloseIcon from "@material-ui/icons/Close";
 
+const container = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			ease: "easeInOut",
+			duration: 5,
+		},
+	},
+};
+
+
 const Modal = ({ position, others, setShowModal }) => {
 	const { description, title, skill, url } = others;
 	return (
 		<Wrapper
+			as={motion.div}
+			variants={container}
+			initial="hidden"
+			animate="visible"
 			className={`project-detail ${
 				position !== "activeSlide" && "non-active-slide"
 			}`}

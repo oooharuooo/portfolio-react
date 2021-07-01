@@ -10,22 +10,26 @@ const container = {
 	},
 	visible: {
 		opacity: 1,
+		transition: {
+			ease: "easeInOut",
+			duration: 3,
+		},
 	},
 };
 
 const item = {
-	hidden: { opacity: [0, 0.5, 1], scale: [1, 0.5, 1] },
+	hidden: { opacity: 0, scale: 0.5 },
 	visible: {
 		opacity: 1,
 		scale: 1,
 		transition: {
 			ease: "easeInOut",
-			duration: 1,
+			duration: 0.5,
 		},
 	},
 };
 
-const ActiveDot = ({ workData, index }) => {
+const ActiveDot = ({ workData, index, animation }) => {
 	return (
 		<Wrapper
 			as={motion.div}
@@ -33,17 +37,21 @@ const ActiveDot = ({ workData, index }) => {
 			initial="hidden"
 			animate="visible"
 		>
-			{workData.map((project, projectIndex) => {
-				return (
-					<React.Fragment key={projectIndex}>
-						<RadioButtonUncheckedIcon
-							component={motion.svg}
-							variants={(projectIndex !== index || index === 0) && item}
-							className={`${index === projectIndex ? "active-dot" : ""}`}
-						/>
-					</React.Fragment>
-				);
-			})}
+			{animation && (
+				<>
+					{workData.map((project, projectIndex) => {
+						return (
+							<React.Fragment key={projectIndex}>
+								<RadioButtonUncheckedIcon
+									component={motion.svg}
+									variants={projectIndex === index && item}
+									className={`${index === projectIndex ? "active-dot" : ""}`}
+								/>
+							</React.Fragment>
+						);
+					})}
+				</>
+			)}
 		</Wrapper>
 	);
 };
