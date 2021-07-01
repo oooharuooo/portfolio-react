@@ -150,14 +150,26 @@ const Wrapper = styled.div`
 		z-index: 50;
 		border: none;
 		background: none;
-		svg {
-			font-size: 4rem;
-		}
 		&-next {
 			left: 0;
+			@media (min-width: 1024px) {
+				left: 5%;
+			}
+			@media (min-width: 1440px) {
+				left: 20%;
+			}
 		}
 		&-prev {
 			right: 0;
+			@media (min-width: 1024px) {
+				right: 5%;
+			}
+			@media (min-width: 1440px) {
+				right: 20%;
+			}
+		}
+		svg {
+			font-size: 4rem;
 		}
 	}
 
