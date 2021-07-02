@@ -148,8 +148,10 @@ const Wrapper = styled.div`
 	.btn {
 		position: absolute;
 		z-index: 50;
+
 		border: none;
 		background: none;
+		color: #bac6f2;
 		&-next {
 			left: 0;
 			@media (min-width: 1024px) {
