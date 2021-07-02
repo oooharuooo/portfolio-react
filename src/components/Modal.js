@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import CloseIcon from "@material-ui/icons/Close";
+import Button from "@material-ui/core/Button";
 
 const container = {
 	hidden: {
@@ -22,6 +23,18 @@ const container = {
 	},
 };
 
+const item = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			ease: "easeInOut",
+			delay: 0.3,
+			duration: 0.5,
+		},
+	},
+};
+
 const Modal = ({ position, others, setShowModal }) => {
 	const { description, title, skill, url } = others;
 	return (
@@ -34,7 +47,7 @@ const Modal = ({ position, others, setShowModal }) => {
 				animate="visible"
 				className={` ${position !== "activeSlide" && "non-active-slide"}`}
 			>
-				<div className="project-detail">
+				<motion.div variants={item} className="project-detail">
 					<button>
 						<CloseIcon onClick={() => setShowModal(false)} />
 					</button>
@@ -42,14 +55,27 @@ const Modal = ({ position, others, setShowModal }) => {
 					<h3 className="project-detail-description">{description}</h3>
 					<p className="project-detail-skill">Skills used: {skill}</p>
 					<div className="project-detail-link">
-						<a href={url.live} rel="noopener noreferrer" target="_blank">
+						<Button
+							variant="contained"
+							color="secondary"
+							href={url.live}
+							rel="noopener noreferrer"
+							target="_blank"
+						>
 							Live
-						</a>
-						<a href={url.github} rel="noopener noreferrer" target="_blank">
+						</Button>
+
+						<Button
+							variant="contained"
+							color="secondary"
+							href={url.github}
+							rel="noopener noreferrer"
+							target="_blank"
+						>
 							Github
-						</a>
+						</Button>
 					</div>
-				</div>
+				</motion.div>
 			</Wrapper>
 		</>
 	);
@@ -63,13 +89,27 @@ const Wrapper = styled.div`
 	position: absolute;
 	height: 60%;
 	width: 100%;
+	@media (min-width: 768px) {
+		width: 60%;
+	}
+	@media (min-width: 1024px) {
+		width: 40%;
+	}
+
+	@media (min-width: 1440px) {
+		width: 25%;
+	}
 
 	background-color: #f8f8ff;
 
 	.project-detail {
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
+		justify-content: space-evenly;
+		height: 100%;
+
+		padding: 0 1rem;
+
 		&-title {
 			font-family: "Viaoda Libre", cursive;
 			color: #ff003b;
@@ -85,6 +125,10 @@ const Wrapper = styled.div`
 				font-size: 2rem;
 				cursor: pointer;
 			}
+		}
+		&-link {
+			display: flex;
+			justify-content: space-evenly;
 		}
 	}
 `;
