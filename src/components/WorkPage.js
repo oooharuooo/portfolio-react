@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import projects from "../constant/projects";
+import Modal from "./Modal";
+import ActiveDot from "./ActiveDot";
+import NavigateButton from "./NavigateButton";
 
 import styled from "styled-components";
 import { motion } from "framer-motion";
-
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 
 const container = {
 	hidden: {
@@ -23,11 +23,24 @@ const container = {
 };
 
 const item = {
-	hidden: { x: [-100, 0], rotateY: [-150, 0], scale: [0.25, 1] },
+	hidden: { opacity: 0, x: 100, rotateY: 150, scale: 0.5 },
 	visible: {
+		opacity: 1,
 		x: 0,
 		rotateY: 0,
-		scale: 1,
+		scale: [0.5, 1, 1.25, 1],
+		transition: {
+			ease: "easeInOut",
+			duration: 0.8,
+		},
+	},
+};
+
+const item2 = {
+	hidden: { opacity: 0, x: 100 },
+	visible: {
+		opacity: 1,
+		x: 0,
 		transition: {
 			ease: "easeInOut",
 			duration: 0.5,
@@ -38,7 +51,8 @@ const item = {
 const WorkPage = () => {
 	const [workData, setWorkData] = useState([]);
 	const [index, setIndex] = useState(0);
-	const [animation, setAnimation] = useState();
+	const [showModal, setShowModal] = useState(false);
+	const [animation, setAnimation] = useState(false);
 
 	// Fetch Data
 	useEffect(() => {
@@ -51,7 +65,7 @@ const WorkPage = () => {
 	// Restart index if ran out of array length
 	useEffect(() => {
 		const lastIndex = workData.length - 1;
-
+		setAnimation(true);
 		if (index < 0) {
 			setIndex(lastIndex);
 		} else if (index > lastIndex) {
@@ -74,61 +88,50 @@ const WorkPage = () => {
 			initial="hidden"
 			animate="visible"
 		>
-			<button className="btn btn-next">
-				<NavigateBeforeIcon onClick={() => setIndex(index - 1)} />
-			</button>
-			{workData.map((project, projectIndex) => {
-				let position = "nextSlide";
-				if (projectIndex === index) position = "activeSlide";
-				if (
-					projectIndex === index - 1 ||
-					(index === 0 && projectIndex === project.length - 1)
-				) {
-					position = "prevSlide";
-				}
-				return (
-					<motion.div
-						variants={
-							(position === "nextSlide" && item) ||
-							(position === "prevSlide" && item)
+			<NavigateButton
+				index={index}
+				setIndex={setIndex}
+				setAnimation={setAnimation}
+			/>
+			<ActiveDot workData={workData} index={index} animation={animation} />
+			{animation && (
+				<>
+					{workData.map((project, projectIndex) => {
+						let position = "nextSlide";
+						if (projectIndex === index) position = "activeSlide";
+						if (
+							projectIndex === index - 1 ||
+							(index === 0 && projectIndex === project.length - 1)
+						) {
+							position = "prevSlide";
 						}
-						key={project.title}
-						className={`project-container ${position}`}
-					>
-						<div className="project-image">
-							<img src={project.url.path} alt={project.title} />
-						</div>
-						<div className="project-detail">
-							<h1 className="project-detail-title">{project.title}</h1>
-							<h3 className="project-detail-description">
-								{project.description}
-							</h3>
-							<h3 className="project-detail-skill">
-								Skills used: {project.skill}
-							</h3>
-							<div className="project-detail-link">
-								<a
-									href={project.url.live}
-									rel="noopener noreferrer"
-									target="_blank"
+						return (
+							<motion.div
+								variants={projectIndex === index ? item : item2}
+								key={project.title}
+								className={`project-container ${position} ${
+									projectIndex === index + 1 ? "overlap" : ""
+								}`}
+							>
+								<motion.div
+									whileHover={{ rotateZ: 5 }}
+									className="project-image"
+									onClick={() => setShowModal(true)}
 								>
-									Live
-								</a>
-								<a
-									href={project.url.github}
-									rel="noopener noreferrer"
-									target="_blank"
-								>
-									Github
-								</a>
-							</div>
-						</div>
-					</motion.div>
-				);
-			})}
-			<button className="btn btn-prev">
-				<NavigateNextIcon onClick={() => setIndex(index + 1)} />
-			</button>
+									<img src={project.url.path} alt={project.title} />
+								</motion.div>
+								{showModal && (
+									<Modal
+										position={position}
+										others={project}
+										setShowModal={setShowModal}
+									/>
+								)}
+							</motion.div>
+						);
+					})}
+				</>
+			)}
 		</Wrapper>
 	);
 };
@@ -145,16 +148,30 @@ const Wrapper = styled.div`
 	.btn {
 		position: absolute;
 		z-index: 50;
+
 		border: none;
 		background: none;
-		svg {
-			font-size: 4rem;
-		}
+		color: #bac6f2;
 		&-next {
 			left: 0;
+			@media (min-width: 1024px) {
+				left: 5%;
+			}
+			@media (min-width: 1440px) {
+				left: 20%;
+			}
 		}
 		&-prev {
 			right: 0;
+			@media (min-width: 1024px) {
+				right: 5%;
+			}
+			@media (min-width: 1440px) {
+				right: 20%;
+			}
+		}
+		svg {
+			font-size: 4rem;
 		}
 	}
 
@@ -165,7 +182,6 @@ const Wrapper = styled.div`
 		position: absolute;
 		top: 0;
 		left: 0;
-		opacity: 0;
 
 		display: flex;
 		flex-direction: column;
@@ -173,19 +189,45 @@ const Wrapper = styled.div`
 		justify-content: space-evenly;
 	}
 	.activeSlide {
-		opacity: 1;
-		transform: translateX(0);
+		z-index: 15;
+		.project-image {
+			cursor: pointer;
+			width: 100%;
+			box-shadow: 5px 5px 15px 5px #bac6f2;
+			@media (min-width: 1024px) {
+				width: 700px;
+			}
+		}
 	}
-	 {
+
+	.non-active-slide {
+		display: none;
+	}
+	.overlap {
+		z-index: 11;
+	}
+
+	.prevSlide,
+	.nextSlide {
+		display: none;
+	}
+
+	@media (min-width: 1024px) {
 		.prevSlide {
-			transform: translateX(-100%);
+			width: 100px;
+			left: 15%;
+			top: -15%;
+			display: flex;
 		}
 		.nextSlide {
-			transform: translateX(100%);
+			width: 100px;
+			left: 80%;
+			top: -15%;
+			display: flex;
 		}
 	}
 
 	.project-image {
-		width: 500px;
+		width: 200px;
 	}
 `;
