@@ -8,9 +8,13 @@ import CloseIcon from "@material-ui/icons/Close";
 const container = {
 	hidden: {
 		opacity: 0,
+		y: 200,
+		scale: 0.5,
 	},
 	visible: {
 		opacity: 1,
+		y: [100, 200, 0],
+		scale: 1,
 		transition: {
 			ease: "easeInOut",
 			duration: 0.5,
@@ -31,9 +35,11 @@ const Modal = ({ position, others, setShowModal }) => {
 				className={` ${position !== "activeSlide" && "non-active-slide"}`}
 			>
 				<div className="project-detail">
-					<CloseIcon onClick={() => setShowModal(false)} />
+					<button>
+						<CloseIcon onClick={() => setShowModal(false)} />
+					</button>
 					<h1 className="project-detail-title">{title}</h1>
-					<h4 className="project-detail-description">{description}</h4>
+					<h3 className="project-detail-description">{description}</h3>
 					<p className="project-detail-skill">Skills used: {skill}</p>
 					<div className="project-detail-link">
 						<a href={url.live} rel="noopener noreferrer" target="_blank">
@@ -68,9 +74,17 @@ const Wrapper = styled.div`
 			font-family: "Viaoda Libre", cursive;
 			color: #ff003b;
 		}
-		svg {
+		button {
+			width: fit-content;
+			border: none;
+			background: none;
+
 			align-self: flex-end;
-			font-size: 2rem;
+
+			svg {
+				font-size: 2rem;
+				cursor: pointer;
+			}
 		}
 	}
 `;

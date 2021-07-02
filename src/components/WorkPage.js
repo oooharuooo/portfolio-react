@@ -148,6 +148,7 @@ const Wrapper = styled.div`
 	.btn {
 		position: absolute;
 		z-index: 50;
+		cursor: pointer;
 
 		border: none;
 		background: none;
