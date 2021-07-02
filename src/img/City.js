@@ -1184,15 +1184,7 @@ const City = () => {
 export default City;
 
 const Wrapper = styled.div`
-	height: 100%;
-	display: flex;
-	align-items: flex-end;
-
 	svg {
-		height: 44%;
-
-		@media (min-width: 1440px) {
-			height: 42%;
-		}
+		height: 200px;
 	}
 `;

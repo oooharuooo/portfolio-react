@@ -31,7 +31,6 @@ const CopyRight = styled.footer`
 
 	display: flex;
 	justify-content: center;
-	align-self: flex-end;
 	height: fit-content;
 
 	padding: 0 1rem;

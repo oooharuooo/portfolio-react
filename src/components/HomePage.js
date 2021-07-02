@@ -35,11 +35,9 @@ const HomePage = () => {
 export default HomePage;
 
 const Home = styled.div`
-	${
-		"" /* background: #e9edfa url("projectImg/city.svg") center / cover no-repeat fixed; */
-	}
 	background-color: #fff;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	flex-grow: 1;
 `;

@@ -24,6 +24,7 @@ export default App;
 
 const MainContainer = styled.div`
 	height: 100vh;
-	display: grid;
-	grid-auto-rows: 1fr 84% 1fr;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 `;
