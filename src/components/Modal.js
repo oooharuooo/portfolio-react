@@ -110,6 +110,10 @@ const Wrapper = styled.div`
 
 		padding: 0 1rem;
 
+		@media (min-width: 1024px) {
+			padding: 0 3rem;
+		}
+
 		&-title {
 			font-family: "Viaoda Libre", cursive;
 			color: #ff003b;

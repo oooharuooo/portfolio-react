@@ -35,4 +35,5 @@ export default AboutPage;
 
 const Wrapper = styled.div`
 	background-color: white;
+	flex-grow: 1;
 `;

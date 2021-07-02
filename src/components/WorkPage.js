@@ -140,8 +140,11 @@ export default WorkPage;
 
 const Wrapper = styled.div`
 	background-color: white;
+
 	display: flex;
 	align-items: center;
+	flex-grow: 1;
+
 	text-align: center;
 	overflow: hidden;
 
