@@ -148,22 +148,26 @@ const Wrapper = styled.div`
 	.btn {
 		position: absolute;
 		z-index: 50;
-		cursor: pointer;
 
 		border: none;
 		background: none;
 		color: #bac6f2;
-		bottom: 2%;
 		&-next {
 			left: 0;
 			@media (min-width: 1024px) {
-				left: 30%;
+				left: 5%;
+			}
+			@media (min-width: 1440px) {
+				left: 20%;
 			}
 		}
 		&-prev {
 			right: 0;
 			@media (min-width: 1024px) {
-				right: 30%;
+				right: 5%;
+			}
+			@media (min-width: 1440px) {
+				right: 20%;
 			}
 		}
 		svg {
