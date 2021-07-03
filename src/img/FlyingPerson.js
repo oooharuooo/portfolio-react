@@ -8,7 +8,12 @@ const container = {
 		opacity: 1,
 		y: -150,
 		scale: 0.5,
-		transition: { ease: "easeOut", duration: 2, delay: 3 },
+		transition: {
+			ease: "easeOut",
+			duration: 2,
+			delay: 3.5,
+			when: "beforeChildren",
+		},
 	},
 };
 const icon = {
@@ -19,7 +24,7 @@ const icon = {
 		y: "200%",
 		x: "-950%",
 		scale: 4,
-		transition: { ease: "easeOut", duration: 4, delay: 4 },
+		transition: { ease: "easeOut", duration: 4 },
 	},
 };
 
@@ -72,6 +77,7 @@ const flyingIntro = {
 		transition: {
 			ease: "easeIn",
 			duration: 9,
+			delay: 3,
 		},
 	},
 };

@@ -12,7 +12,7 @@ const container = {
 		opacity: 1,
 		transition: {
 			ease: "easeInOut",
-			duration: 3,
+			duration: 2,
 		},
 	},
 };
@@ -21,7 +21,7 @@ const item = {
 	hidden: { opacity: 0, scale: 0.5 },
 	visible: {
 		opacity: 1,
-		scale: 1,
+		scale: [0.2, 0.5, 1, 1.25, 1],
 		transition: {
 			ease: "easeInOut",
 			duration: 0.5,
