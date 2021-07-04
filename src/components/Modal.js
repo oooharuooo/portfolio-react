@@ -22,6 +22,15 @@ const container = {
 			when: "beforeChildren",
 		},
 	},
+	exit: {
+		opacity: 0,
+		y: 200,
+		scale: 0.5,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
+		},
+	},
 };
 
 const stagger = {
@@ -51,6 +60,7 @@ const Modal = ({ position, others, setShowModal }) => {
 				variants={container}
 				initial="hidden"
 				animate="visible"
+				exit="exit"
 				className={` ${position !== "activeSlide" && "non-active-slide"}`}
 			>
 				<motion.div variants={stagger} className="project-detail">

@@ -5,7 +5,7 @@ import ActiveDot from "./ActiveDot";
 import NavigateButton from "./NavigateButton";
 
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const container = {
 	hidden: {
@@ -130,13 +130,15 @@ const WorkPage = () => {
 								>
 									<img src={project.url.path} alt={project.title} />
 								</motion.div>
-								{showModal && (
-									<Modal
-										position={position}
-										others={project}
-										setShowModal={setShowModal}
-									/>
-								)}
+								<AnimatePresence>
+									{showModal && (
+										<Modal
+											position={position}
+											others={project}
+											setShowModal={setShowModal}
+										/>
+									)}
+								</AnimatePresence>
 							</motion.div>
 						);
 					})}
