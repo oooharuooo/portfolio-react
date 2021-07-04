@@ -5,7 +5,7 @@ import ActiveDot from "./ActiveDot";
 import NavigateButton from "./NavigateButton";
 
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const container = {
 	hidden: {
@@ -18,6 +18,14 @@ const container = {
 		transition: {
 			ease: "easeInOut",
 			duration: 1,
+			when: "beforeChildren",
+		},
+	},
+	exit: {
+		rotateX: 90,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
 		},
 	},
 };
@@ -76,8 +84,9 @@ const WorkPage = () => {
 	// Auto go to next slide
 	// useEffect(() => {
 	// 	let slider = setInterval(() => {
+	// 		setAnimation(false);
 	// 		setIndex(index + 1);
-	// 	}, 5000);
+	// 	}, 8000);
 	// 	return () => clearInterval(slider);
 	// }, [index]);
 
@@ -87,6 +96,7 @@ const WorkPage = () => {
 			variants={container}
 			initial="hidden"
 			animate="visible"
+			exit="exit"
 		>
 			<NavigateButton
 				index={index}
@@ -120,13 +130,15 @@ const WorkPage = () => {
 								>
 									<img src={project.url.path} alt={project.title} />
 								</motion.div>
-								{showModal && (
-									<Modal
-										position={position}
-										others={project}
-										setShowModal={setShowModal}
-									/>
-								)}
+								<AnimatePresence>
+									{showModal && (
+										<Modal
+											position={position}
+											others={project}
+											setShowModal={setShowModal}
+										/>
+									)}
+								</AnimatePresence>
 							</motion.div>
 						);
 					})}

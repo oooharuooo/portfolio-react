@@ -1,6 +1,5 @@
 import React from "react";
-
-
+import { motion } from "framer-motion";
 
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
@@ -11,17 +10,36 @@ const NavigateButton = ({ index, setIndex, setAnimation }) => {
 		setAnimation(false);
 	};
 
+	const buttonHover = {
+		hover: {
+			scale: 1.5,
+			color: "rgb(255 0 59)",
+		},
+		tap: {
+			scale: 0.8,
+		},
+	};
+
 	return (
 		<>
-			<button className="btn btn-next">
+			<motion.button
+				variants={buttonHover}
+				whileHover="hover"
+				whileTap="tap"
+				className="btn btn-next"
+			>
 				<NavigateBeforeIcon onClick={() => NavigateButton(-1)} />
-			</button>
-			<button className="btn btn-prev">
+			</motion.button>
+			<motion.button
+				variants={buttonHover}
+				whileHover="hover"
+				whileTap="tap"
+				className="btn btn-prev"
+			>
 				<NavigateNextIcon onClick={() => NavigateButton(1)} />
-			</button>
+			</motion.button>
 		</>
 	);
 };
 
 export default NavigateButton;
-

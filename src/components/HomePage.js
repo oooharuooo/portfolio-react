@@ -15,6 +15,13 @@ const container = {
 			duration: 1,
 		},
 	},
+	exit: {
+		rotateX: 90,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
+		},
+	},
 };
 
 const HomePage = () => {
@@ -24,6 +31,7 @@ const HomePage = () => {
 			variants={container}
 			initial="hidden"
 			animate="visible"
+			exit="exit"
 		>
 			<Cloud />
 			<FlyingPerson />

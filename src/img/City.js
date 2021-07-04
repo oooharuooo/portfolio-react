@@ -6,14 +6,18 @@ const container = {
 	hidden: { opacity: 0 },
 	show: {
 		opacity: 1,
-		transition: { ease: "easeOut", duration: 0.5, delay: 0.9 },
+		transition: {
+			ease: "easeOut",
+			duration: 0.25,
+			delay: 0.5,
+			when: "beforeChildren",
+		},
 	},
 };
 
 const stagger = {
 	show: {
 		transition: {
-			delayChildren: 0.5,
 			staggerChildren: 0.15,
 			staggerDirection: -1,
 		},

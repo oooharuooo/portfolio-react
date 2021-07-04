@@ -9,7 +9,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
 
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const container = {
 	hidden: { opacity: 0 },
@@ -70,44 +70,68 @@ const NavBar = () => {
 					/>
 				)}
 			</NavMenu>
+
 			<motion.div className="links-menu-container">
-				{showMenu && (
-					<>
-						<motion.ul className="links-menu" variants={stagger}>
-							{links.map(({ name, url }) => (
-								<motion.li key={url} variants={item}>
-									<NavLink
-										exact
-										to={url}
-										activeClassName="active-link"
+				<AnimatePresence>
+					{showMenu && (
+						<>
+							<motion.ul
+								className="links-menu"
+								variants={stagger}
+								exit={{
+									opacity: 0,
+									x: "-100%",
+									transition: {
+										duration: 0.8,
+									},
+								}}
+							>
+								{links.map(({ name, url }) => (
+									<motion.li key={url} variants={item}>
+										<NavLink
+											exact
+											to={url}
+											activeClassName="active-link"
+											className="links-hover-effect"
+											onClick={() => setShowMenu(false)}
+										>
+											{name}
+										</NavLink>
+									</motion.li>
+								))}
+							</motion.ul>
+						</>
+					)}
+				</AnimatePresence>
+			</motion.div>
+			<motion.div className="social-menu-container">
+				<AnimatePresence>
+					{showMenu && (
+						<motion.ul
+							variants={stagger}
+							exit={{
+								opacity: 0,
+								y: "100%",
+								transition: {
+									duration: 0.8,
+								},
+							}}
+						>
+							{social.map(({ name, url, icon }) => (
+								<motion.li key={name} variants={item}>
+									<a
 										className="links-hover-effect"
-										onClick={() => setShowMenu(false)}
+										href={url}
+										rel="noopener noreferrer"
+										target="_blank"
 									>
-										{name}
-									</NavLink>
+										{icon}
+									</a>
 								</motion.li>
 							))}
 						</motion.ul>
-					</>
-				)}
-			</motion.div>
-			<motion.div className="social-menu-container">
-				{showMenu && (
-					<motion.ul variants={stagger}>
-						{social.map(({ name, url, icon }) => (
-							<motion.li key={name} variants={item}>
-								<a
-									className="links-hover-effect"
-									href={url}
-									rel="noopener noreferrer"
-									target="_blank"
-								>
-									{icon}
-								</a>
-							</motion.li>
-						))}
-					</motion.ul>
-				)}
+					)}
+				</AnimatePresence>
 			</motion.div>
 		</NavBarContainer>
 	);
@@ -160,7 +184,6 @@ const NavBarContainer = styled.nav`
 		}
 	}
 	.social-menu-container {
-		border-left: 1px solid white;
 		background-color: black;
 
 		align-self: flex-end;

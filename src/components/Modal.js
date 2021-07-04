@@ -18,7 +18,27 @@ const container = {
 		scale: 1,
 		transition: {
 			ease: "easeInOut",
+			duration: 0.25,
+			when: "beforeChildren",
+		},
+	},
+	exit: {
+		opacity: 0,
+		y: 200,
+		scale: 0.5,
+		transition: {
+			ease: "easeInOut",
 			duration: 0.5,
+		},
+	},
+};
+
+const stagger = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: {
+			staggerChildren: 0.2,
 		},
 	},
 };
@@ -27,11 +47,6 @@ const item = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,
-		transition: {
-			ease: "easeInOut",
-			delay: 0.3,
-			duration: 0.5,
-		},
 	},
 };
 
@@ -45,16 +60,24 @@ const Modal = ({ position, others, setShowModal }) => {
 				variants={container}
 				initial="hidden"
 				animate="visible"
+				exit="exit"
 				className={` ${position !== "activeSlide" && "non-active-slide"}`}
 			>
-				<motion.div variants={item} className="project-detail">
-					<button>
+				<motion.div variants={stagger} className="project-detail">
+					<motion.button variants={item}>
 						<CloseIcon onClick={() => setShowModal(false)} />
-					</button>
-					<h1 className="project-detail-title">{title}</h1>
-					<h3 className="project-detail-description">{description}</h3>
-					<p className="project-detail-skill">Skills used: {skill}</p>
-					<div className="project-detail-link">
+					</motion.button>
+					<motion.h1 variants={item} className="project-detail-title">
+						{title}
+					</motion.h1>
+					<motion.h3 variants={item} className="project-detail-description">
+						{description}
+					</motion.h3>
+					<motion.p variants={item} className="project-detail-skill">
+						Skills used: {skill}
+					</motion.p>
+
+					<motion.div variants={item} className="project-detail-link">
 						<Button
 							variant="contained"
 							color="secondary"
@@ -74,7 +97,7 @@ const Modal = ({ position, others, setShowModal }) => {
 						>
 							Github
 						</Button>
-					</div>
+					</motion.div>
 				</motion.div>
 			</Wrapper>
 		</>
@@ -86,11 +109,14 @@ export default Modal;
 const Wrapper = styled.div`
 	font-family: "Open Sans", sans-serif;
 
+	display: flex;
+	align-items: center;
+
 	position: absolute;
-	height: 60%;
+	height: 55%;
 	width: 100%;
 	@media (min-width: 768px) {
-		width: 60%;
+		width: 55%;
 	}
 	@media (min-width: 1024px) {
 		width: 40%;
@@ -105,8 +131,6 @@ const Wrapper = styled.div`
 	.project-detail {
 		display: flex;
 		flex-direction: column;
-		justify-content: space-evenly;
-		height: 100%;
 
 		padding: 0 1rem;
 
