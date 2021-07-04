@@ -21,6 +21,13 @@ const container = {
 			when: "beforeChildren",
 		},
 	},
+	exit: {
+		rotateX: 90,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
+		},
+	},
 };
 
 const item = {
@@ -75,13 +82,13 @@ const WorkPage = () => {
 	}, [index, workData, animation]);
 
 	// Auto go to next slide
-	useEffect(() => {
-		let slider = setInterval(() => {
-			setAnimation(false);
-			setIndex(index + 1);
-		}, 10000);
-		return () => clearInterval(slider);
-	}, [index]);
+	// useEffect(() => {
+	// 	let slider = setInterval(() => {
+	// 		setAnimation(false);
+	// 		setIndex(index + 1);
+	// 	}, 8000);
+	// 	return () => clearInterval(slider);
+	// }, [index]);
 
 	return (
 		<Wrapper
@@ -89,6 +96,7 @@ const WorkPage = () => {
 			variants={container}
 			initial="hidden"
 			animate="visible"
+			exit="exit"
 		>
 			<NavigateButton
 				index={index}

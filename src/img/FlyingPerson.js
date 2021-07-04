@@ -21,9 +21,9 @@ const icon = {
 		x: 0,
 	},
 	visible: {
-		y: "200%",
+		y: "500%",
 		x: "-950%",
-		scale: 4,
+		scale: 2.5,
 		transition: { ease: "easeOut", duration: 4 },
 	},
 };
@@ -73,11 +73,10 @@ const flyingIntro = {
 	},
 	visible: {
 		opacity: 0,
-		y: -80,
+		y: -180,
 		transition: {
 			ease: "easeIn",
-			duration: 9,
-			delay: 3,
+			duration: 1,
 		},
 	},
 };

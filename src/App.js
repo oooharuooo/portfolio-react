@@ -1,22 +1,28 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
+
 import styled from "styled-components";
+
+import { AnimatePresence } from "framer-motion";
 
 import { NavBar, Footer, AboutPage, WorkPage, HomePage } from "./components/";
 
 const App = () => {
+	let location = useLocation();
+
+	console.log(location);
 	return (
-		<Router>
-			<MainContainer>
-				<NavBar />
-				<Switch>
+		<MainContainer>
+			<NavBar />
+			<AnimatePresence exitBeforeEnter>
+				<Switch location={location} key={location.key}>
 					<Route exact path="/" component={HomePage} />
 					<Route exact path="/about" component={AboutPage} />
 					<Route exact path="/work" component={WorkPage} />
 				</Switch>
-				<Footer />
-			</MainContainer>
-		</Router>
+			</AnimatePresence>
+			<Footer />
+		</MainContainer>
 	);
 };
 

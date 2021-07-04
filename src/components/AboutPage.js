@@ -10,10 +10,16 @@ const container = {
 	visible: {
 		opacity: 1,
 		x: 0,
-		// backgroundColor: "white",
 		transition: {
 			ease: "easeInOut",
 			duration: 1,
+		},
+	},
+	exit: {
+		rotateX: 90,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
 		},
 	},
 };
@@ -25,6 +31,7 @@ const AboutPage = () => {
 			variants={container}
 			initial="hidden"
 			animate="visible"
+			exit="exit"
 		>
 			About
 		</Wrapper>

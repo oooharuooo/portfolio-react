@@ -103,7 +103,7 @@ const Wrapper = styled.div`
 	align-items: center;
 
 	position: absolute;
-	height: 45%;
+	height: 55%;
 	width: 100%;
 	@media (min-width: 768px) {
 		width: 55%;

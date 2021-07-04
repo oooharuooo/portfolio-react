@@ -10,18 +10,30 @@ const NavigateButton = ({ index, setIndex, setAnimation }) => {
 		setAnimation(false);
 	};
 
+	const buttonHover = {
+		hover: {
+			scale: 1.5,
+			color: "rgb(255 0 59)",
+		},
+		tap: {
+			scale: 0.8,
+		},
+	};
+
 	return (
 		<>
 			<motion.button
-				whileHover={{ scale: 1.5 }}
-				whileTap={{ scale: 0.8 }}
+				variants={buttonHover}
+				whileHover="hover"
+				whileTap="tap"
 				className="btn btn-next"
 			>
 				<NavigateBeforeIcon onClick={() => NavigateButton(-1)} />
 			</motion.button>
 			<motion.button
-				whileHover={{ scale: 1.5 }}
-				whileTap={{ scale: 0.8 }}
+				variants={buttonHover}
+				whileHover="hover"
+				whileTap="tap"
 				className="btn btn-prev"
 			>
 				<NavigateNextIcon onClick={() => NavigateButton(1)} />
