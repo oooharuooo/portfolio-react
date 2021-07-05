@@ -1,9 +1,40 @@
 import React from "react";
 import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Lamp = () => {
+const lampLight = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.25,
+		},
+	},
+};
+
+const lampButton = {
+	hover: {
+		scale: 1.25,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.25,
+		},
+	},
+	tap: {
+		scale: [1.25, 0.5, 1],
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
+		},
+	},
+};
+
+const Lamp = ({ lightOpening, setLightOpening }) => {
 	return (
-		<Wrapper>
+		<Wrapper onClick={() => setLightOpening(!lightOpening)}>
 			<svg
 				width="65"
 				height="105"
@@ -11,7 +42,12 @@ const Lamp = () => {
 				fill="none"
 				xmlns="http://www.w3.org/2000/svg"
 			>
-				<g id="lamp">
+				<motion.g
+					variants={lampButton}
+					whileHover="hover"
+					whileTap="tap"
+					id="lamp"
+				>
 					<path
 						id="Vector"
 						d="M31.4989 0L32.087 28.3856L32.8008 28.2641L33.4339 0H31.4989Z"
@@ -32,12 +68,20 @@ const Lamp = () => {
 						d="M24.6029 31.9485C24.6029 31.9485 16.7507 34.6815 18.3489 47.1054L24.6029 31.9485Z"
 						fill="white"
 					/>
-					<path
-						id="light"
-						d="M15.8841 51.6449L0 105L65 104.405L48.6086 52.7682L15.8841 51.6449Z"
-						fill="url(#paint0_linear)"
-					/>
-				</g>
+					<AnimatePresence>
+						{lightOpening && (
+							<motion.path
+								variants={lampLight}
+								initial="hidden"
+								animate="visible"
+								exit="hidden"
+								id="light"
+								d="M15.8841 51.6449L0 105L65 104.405L48.6086 52.7682L15.8841 51.6449Z"
+								fill="url(#paint0_linear)"
+							/>
+						)}
+					</AnimatePresence>
+				</motion.g>
 				<defs>
 					<linearGradient
 						id="paint0_linear"
