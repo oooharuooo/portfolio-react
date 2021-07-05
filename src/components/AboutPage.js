@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Typewriter from "typewriter-effect";
 
 import WorkingPerson from "../img/WorkingPerson";
+import Lamp from "../img/Lamp";
+import skills from "../constant/skills";
 
 const container = {
 	hidden: {
@@ -37,38 +39,46 @@ const AboutPage = () => {
 			exit="exit"
 		>
 			<motion.div className="container">
-				<Typewriter
-					options={{
-						cursor: "",
-					}}
-					onInit={(typewriter) => {
-						typewriter.typeString("<h1>Hello,</h1>").stop().start();
-					}}
-				/>
-
 				<div className="container-intro">
 					<Typewriter
 						options={{
-							loop: true,
-							delay: 100,
+							delay: 80,
+							deleteSpeed: 80,
 							wrapperClassName: "type-container",
+							cursor: "",
 						}}
 						onInit={(typewriter) => {
 							typewriter
 								.pauseFor(1000)
-								.typeString("<h2>My name is <span>Dat</span>.</h2>")
+								.typeString("<h1>Hello,</h1>")
+								.typeString("<h1>My name is <span>Dat</span>.</h1>")
 								.pauseFor(1000)
 								.deleteChars(15)
-								.typeString("<h2>I am a <span>Web Developer</span>.</h2>")
-								.pauseFor(1000)
+								.typeString("<h1>I am a <span>Web Developer</span>.</h1>")
+								.stop()
 								.start();
 						}}
 					/>
+					<h3>
+						It is my mission to build clean, beautiful, and easy-to-use
+						websites.
+					</h3>
+					<h4>Tools I use:</h4>
+					<div className="skills">
+						{skills.map(({ title, items }) => {
+							return (
+								<ul key={title} className={title}>
+									{items.map((item, index) => (
+										<li key={index}>{item}</li>
+									))}
+								</ul>
+							);
+						})}
+					</div>
 				</div>
 			</motion.div>
-			<div className="container-clip-path">
-				<WorkingPerson />
-			</div>
+			<Lamp />
+			<WorkingPerson />
 		</Wrapper>
 	);
 };
@@ -82,24 +92,22 @@ const Wrapper = styled.div`
 
 	position: relative;
 
-	h2 span {
+	h1 span {
 		color: red;
 	}
 
 	.container {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+
+		padding: 6rem 2rem;
 		&-intro {
-			height: 50px;
+			height: 100px;
 		}
 	}
-	.container-clip-path {
-		background-color: green;
-		clip-path: circle(50% at 100% 10%);
 
-		width: 100%;
-		height: 50%;
-		position: absolute;
+	.skills {
+		display: flex;
+		justify-content: space-around;
 	}
 `;

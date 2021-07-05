@@ -10,7 +10,6 @@ import { NavBar, Footer, AboutPage, WorkPage, HomePage } from "./components/";
 const App = () => {
 	let location = useLocation();
 
-	console.log(location);
 	return (
 		<MainContainer>
 			<NavBar />
