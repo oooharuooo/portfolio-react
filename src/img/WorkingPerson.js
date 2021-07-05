@@ -1,11 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
+const container = {
+	hidden: {
+		opacity: 0,
+		clipPath: "circle(10% at 100% 0%)",
+	},
+	visible: {
+		opacity: 1,
+		clipPath: "circle(25% at 100% 10%)",
+		transition: {
+			ease: "easeInOut",
+			duration: 2,
+			delay: 0.5,
+		},
+	},
+};
 
 const WorkingPerson = ({ lightOpening }) => {
 	return (
 		<>
 			{lightOpening && (
-				<Wrapper>
+				<Wrapper
+					as={motion.div}
+					variants={container}
+					initial="hidden"
+					animate="visible"
+				>
 					<div>
 						<svg
 							width="232"
@@ -218,7 +240,7 @@ export default WorkingPerson;
 
 const Wrapper = styled.div`
 	background-color: #eef9ee;
-	clip-path: circle(50% at 100% 10%);
+	clip-path: circle(35% at 100% 10%);
 
 	width: 100%;
 	height: 50%;
@@ -231,8 +253,14 @@ const Wrapper = styled.div`
 		align-items: flex-end;
 
 		svg {
-			width: 35%;
+			width: 25%;
 			height: auto;
+			@media (min-width: 768px) {
+				width: 15%;
+			}
+			@media (min-width: 1024px) {
+				width: 12%;
+			}
 		}
 	}
 `;

@@ -60,7 +60,7 @@ const mission = {
 		opacity: 1,
 		transition: {
 			ease: "easeInOut",
-			delay: 6.5,
+			delay: 8.5,
 			duration: 1,
 		},
 	},
@@ -98,7 +98,7 @@ const AboutPage = () => {
 								}}
 								onInit={(typewriter) => {
 									typewriter
-										.pauseFor(1000)
+										.pauseFor(2000)
 										.typeString("<h1>Hello,</h1>")
 										.typeString("<h1>My name is <span>Dat</span>.</h1>")
 										.pauseFor(1000)
@@ -162,6 +162,7 @@ const Wrapper = styled.div`
 
 	.container {
 		display: flex;
+		justify-content: center;
 		height: 100%;
 		background-color: white;
 
