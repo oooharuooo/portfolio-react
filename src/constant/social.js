@@ -21,7 +21,7 @@ const social = [
 	},
 	{
 		name: "Resume",
-		url: "/",
+		url: "https://oooharuooo.github.io/DatVThong/Portfolio/img/Dat's%20CV.pdf",
 		icon: <NoteOutlinedIcon />,
 	},
 ];
