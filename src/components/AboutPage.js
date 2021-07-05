@@ -10,11 +10,6 @@ import skills from "../constant/skills";
 const wrapper = {
 	hidden: {
 		opacity: 0,
-		// x: "-100%",
-		transition: {
-			ease: "easeInOut",
-			delay: 1.5,
-		},
 	},
 	visible: {
 		opacity: 1,
@@ -57,6 +52,20 @@ const container = {
 	},
 };
 
+const mission = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			ease: "easeInOut",
+			delay: 6.5,
+			duration: 1,
+		},
+	},
+};
+
 const AboutPage = () => {
 	const [lightOpening, setLightOpening] = useState(false);
 
@@ -82,10 +91,10 @@ const AboutPage = () => {
 						<div className="container-intro">
 							<Typewriter
 								options={{
-									delay: 80,
-									deleteSpeed: 80,
+									delay: 50,
+									deleteSpeed: 20,
 									wrapperClassName: "type-container",
-									cursor: "",
+									cursorClassName: "none-cursor",
 								}}
 								onInit={(typewriter) => {
 									typewriter
@@ -99,22 +108,24 @@ const AboutPage = () => {
 										.start();
 								}}
 							/>
-							<h3>
-								It is my mission to build clean, beautiful, and easy-to-use
-								websites.
-							</h3>
-							<h4>Tools I use:</h4>
-							<div className="container-skills">
-								{skills.map(({ title, items }) => {
-									return (
-										<ul key={title} className={title}>
-											{items.map((item, index) => (
-												<li key={index}>{item}</li>
-											))}
-										</ul>
-									);
-								})}
-							</div>
+							<motion.div variants={mission} className="container-mission">
+								<h3>
+									It is <span>my mission</span> to build fast, attractive, and
+									easy-to-use websites.
+								</h3>
+								<h4>Tools I use:</h4>
+								<div className="container-skills">
+									{skills.map(({ title, items }) => {
+										return (
+											<ul key={title} className={title}>
+												{items.map((item, index) => (
+													<li key={index}>{item}</li>
+												))}
+											</ul>
+										);
+									})}
+								</div>
+							</motion.div>
 						</div>
 						<WorkingPerson lightOpening={lightOpening} />
 					</motion.div>
@@ -130,18 +141,35 @@ const Wrapper = styled.div`
 	flex-grow: 1;
 	position: relative;
 
-	h1 span {
-		color: red;
+	font-family: "Open Sans", sans-serif;
+
+	.none-cursor {
+		display: none;
+	}
+
+	h1,
+	h3 {
+		span {
+			color: #ff003b;
+			font-size: 3rem;
+			font-family: "Viaoda Libre", cursive;
+		}
+	}
+
+	h3 span {
+		font-size: 2rem;
 	}
 
 	.container {
 		display: flex;
 		height: 100%;
 		background-color: white;
+
 		&-intro {
 			align-self: center;
 			padding: 0 2rem;
 		}
+
 		&-skills {
 			display: flex;
 			justify-content: space-around;

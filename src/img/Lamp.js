@@ -16,6 +16,17 @@ const lampLight = {
 };
 
 const lampButton = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			ease: "easeIn",
+			delay: 1,
+			duration: 1,
+		},
+	},
 	hover: {
 		scale: 1.25,
 		transition: {
@@ -44,6 +55,8 @@ const Lamp = ({ lightOpening, setLightOpening }) => {
 			>
 				<motion.g
 					variants={lampButton}
+					initial="hidden"
+					animate="visible"
 					whileHover="hover"
 					whileTap="tap"
 					id="lamp"
