@@ -14,6 +14,52 @@ const container = {
 			ease: "easeInOut",
 			duration: 2,
 			delay: 0.5,
+			when: "beforeChildren",
+		},
+	},
+};
+
+const dropPerson = {
+	hidden: {
+		y: -500,
+	},
+	visible: {
+		y: 0,
+		transition: {
+			ease: "easeInOut",
+			duration: 0.5,
+			when: "beforeChildren",
+		},
+	},
+};
+
+const handTyping = {
+	hidden: {
+		y: 0,
+	},
+	visible: {
+		y: [-2, 1, 0, -2, 0],
+		transition: {
+			ease: "easeInOut",
+			duration: 1,
+			delay: 0.5,
+			repeat: Infinity,
+			repeatType: "reverse",
+		},
+	},
+};
+
+const monitor = {
+	hidden: {
+		opacity: 0,
+	},
+	visible: {
+		opacity: 1,
+		fill: "black",
+		transition: {
+			ease: "easeInOut",
+			duration: 1,
+			delay: 0.5,
 		},
 	},
 };
@@ -104,7 +150,7 @@ const WorkingPerson = ({ lightOpening }) => {
 										fill="#3F3D56"
 									/>
 								</g>
-								<g id="person">
+								<motion.g variants={dropPerson} id="person">
 									<path
 										id="Vector_13"
 										d="M85.8427 220.877C85.8427 220.877 84.0761 236.679 80.5429 239.427C77.0097 242.175 95.2647 245.61 95.2647 245.61L96.4424 224.999L85.8427 220.877Z"
@@ -163,7 +209,8 @@ const WorkingPerson = ({ lightOpening }) => {
 									/>
 									<g id="person-hand">
 										<g id="person-hand-right">
-											<path
+											<motion.path
+												variants={handTyping}
 												id="Vector_24"
 												d="M92.9091 132.247C92.9091 132.247 71.7099 134.308 78.7763 140.491C85.8427 146.675 92.9091 136.369 92.9091 136.369V132.247Z"
 												fill="#FFB9B9"
@@ -175,7 +222,8 @@ const WorkingPerson = ({ lightOpening }) => {
 											/>
 										</g>
 										<g id="person-hand-left">
-											<path
+											<motion.path
+												variants={handTyping}
 												id="Vector_26"
 												d="M113.255 138.202C113.255 138.202 93.7373 132.162 92.1455 137.357C90.5537 142.553 108.809 147.362 108.809 147.362H116.464L113.255 138.202Z"
 												fill="#FFB9B9"
@@ -187,7 +235,7 @@ const WorkingPerson = ({ lightOpening }) => {
 											/>
 										</g>
 									</g>
-								</g>
+								</motion.g>
 								<g id="monitor">
 									<path
 										id="Vector_28"
@@ -200,10 +248,10 @@ const WorkingPerson = ({ lightOpening }) => {
 										d="M48.4786 141.57L58.047 142.466L71.6908 141.432L71.4533 141.406L57.663 141.983L48.4195 140.812C45.7971 140.007 47.2985 134.694 48.2447 132.014L47.4745 132.06C44.0488 141.432 48.4786 141.57 48.4786 141.57Z"
 										fill="black"
 									/>
-									<path
+									<motion.path
+										variants={monitor}
 										id="Vector_30"
 										d="M32.6196 74.8617L35.4853 123.342V129.194C35.5727 130.664 36.172 133.224 37.436 133.215L39.7838 130.865H82.0529C82.7806 130.86 80.3339 129.621 80.2618 128.776L83.226 126.97L80.1239 91.4212C80.0749 90.8597 79.8894 90.3262 79.5893 89.8835C79.2892 89.4408 78.887 89.1074 78.43 88.9224L36.4366 71.9563C35.0072 71.3788 33.5531 71.5842 32.6435 72.4663C32.0198 73.0713 32.5475 73.6544 32.6196 74.8617Z"
-										fill="#4C4C56"
 									/>
 									<path
 										id="Vector_31"
