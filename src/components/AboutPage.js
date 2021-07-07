@@ -98,7 +98,7 @@ const AboutPage = () => {
 								}}
 								onInit={(typewriter) => {
 									typewriter
-										.pauseFor(2000)
+										.pauseFor(3000)
 										.typeString("<h1>Hello,</h1>")
 										.typeString("<h1>My name is <span>Dat</span>.</h1>")
 										.pauseFor(1000)
