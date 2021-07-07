@@ -60,6 +60,8 @@ const monitor = {
 			ease: "easeInOut",
 			duration: 1,
 			delay: 0.5,
+			repeat: Infinity,
+			repeatType: "reverse",
 		},
 	},
 };

@@ -113,7 +113,7 @@ const Wrapper = styled.div`
 	align-items: center;
 
 	position: absolute;
-	height: 55%;
+	height: 60%;
 	width: 100%;
 	@media (min-width: 768px) {
 		width: 55%;
@@ -165,4 +165,7 @@ const EmptyContainer = styled.div`
 	position: absolute;
 	height: 100%;
 	width: 100%;
+
+	background-color: white;
+	opacity: 0.8;
 `;

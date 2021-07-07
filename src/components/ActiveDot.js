@@ -63,6 +63,7 @@ const Wrapper = styled.div`
 	top: 90%;
 	left: 0;
 	right: 0;
+	z-index: 49;
 
 	.active-dot {
 		border-radius: 50%;
